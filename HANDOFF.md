@@ -1,20 +1,24 @@
 # HANDOFF — rclone-server-app
 
-_Обновлено: 2026-10-31 · ветка: `main`_
+_Обновлено: 2026-11-01 · ветка: `chore/handoff-2026-11-01`_
 
 ## Кратко
 Статические страницы (главная + privacy policy) для OAuth-приложения Google «rclone-server» (проект GCP rclone-server), публикуются через GitHub Pages из `main` (корень).
 
 ## Что сделано
-- [2026-10-31] index.html, privacy.html, .nojekyll; включены GitHub Pages.
+- [2026-11-01] Приложение rclone-server переведено в Production; rclone `gdrive` на сервере переподключён с собственным OAuth-клиентом (Desktop), старый токен общего клиента rclone отозван.
+- [2026-10-31] index.html, privacy.html, .nojekyll; включены GitHub Pages (обе страницы отвечают 200).
 
 ## Что дальше
-1. [ ] Указать URL главной и политики в Google Cloud Console → OAuth consent screen / Branding, добавить домен `denysnew.github.io` в Authorized domains.
-2. [ ] Перевести приложение в Production; создать OAuth client (Desktop) и переподключить rclone `gdrive` со своим client_id.
+1. [x] URL главной и политики указаны в Google Cloud Console, приложение в Production.
+2. [x] OAuth client (Desktop) создан, rclone `gdrive` работает с ним.
+3. [ ] Поддерживать страницы актуальными при изменении назначения приложения (иначе Google может потребовать повторную проверку).
 
 ## Принятые решения
 - Репозиторий публичный — GitHub Pages на бесплатном плане работает только для публичных.
 - Контакт — ссылка на GitHub-профиль, без email.
+- Полную верификацию Google не проходим: для личного использования достаточно Production без верификации (экран «unverified app» при входе — норма).
+- client_secret не перевыпускаем (решение владельца, 2026-11-01); хранится только в `~/.config/rclone/rclone.conf` на сервере.
 
 ## Состояние кода
 Чистый статический HTML, сборки нет. Секретов в репозитории нет и быть не должно.
